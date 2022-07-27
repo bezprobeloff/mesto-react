@@ -1,20 +1,23 @@
 import React from 'react';
 import { api } from '../utils/api';
+import Card from './Card';
 
 const Main = (props) => {
   const [userName, setUserName] = React.useState('');
   const [userDescription, setDescription] = React.useState('');
   const [userAvatar, setUserAvatar] = React.useState('');
+  const [cards, setCards] = React.useState([]);
 
   React.useEffect(() => {
-    api.getUser()
-      .then(res => {
-        setUserName(res.name);
-        setDescription(res.about);
-        setUserAvatar(res.avatar);
+    Promise.all([api.getUser(), api.getInitialCards()])
+      .then(([userData, dataCards]) => {
+        setUserName(userData.name);
+        setDescription(userData.about);
+        setUserAvatar(userData.avatar);
+        setCards(dataCards);
       })
       .catch(err => console.log(err));
-  });
+  }, []);
 
   return (
     <main className="content">
@@ -31,7 +34,11 @@ const Main = (props) => {
         </div>
         <button className="profile__button-add" type="button" onClick={props.onAddPlace} aria-label="Добавить"></button>
       </section>
-      <section className="cards" aria-label="Фотокарточки"></section>
+      <section className="cards" aria-label="Фотокарточки">
+        {cards.map((card, i) =>
+          <Card card={card} key={i}/>
+        )}
+      </section>
     </main>
   );
 }
