@@ -13,22 +13,21 @@ function App() {
 
   const handleEditAvatarClick = () => {
     setEditAvatarPopupOpen(true);
-    //<PopupWithForm title='Обновить аватар' name='update-avatar' isOpen={isEditAvatarPopupOpen}/>
-    //const popup = document.querySelector('.popup_type_update-avatar');
-    //popup.classList.add('popup_opened');
   };
 
   const handleEditProfileClick = () => {
     setEditProfilePopupOpen(true);
-    //const popup = document.querySelector('.popup_type_edit-profile');
-    //popup.classList.add('popup_opened');
   };
 
   const handleAddPlaceClick = () => {
     setAddPlacePopupOpen(true);
-    //const popup = document.querySelector('.popup_type_add-card');
-    //popup.classList.add('popup_opened');
   };
+
+  const closeAllPopups = () => {
+    setEditAvatarPopupOpen(false);
+    setEditProfilePopupOpen(false);
+    setAddPlacePopupOpen(false);
+  }
 
 
   return (
@@ -40,7 +39,9 @@ function App() {
         onEditAvatar={handleEditAvatarClick}
       />
       <Footer/>
-
+      <PopupWithForm title='Обновить аватар' name='update-avatar' isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups}/>
+      <PopupWithForm title='Редактировать профиль' name='edit-profile' isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}/>
+      <PopupWithForm title='Новое место' name='add-card' isOpen={isAddPlacePopupOpen} onClose={closeAllPopups}/>
     </div>
   );
 }

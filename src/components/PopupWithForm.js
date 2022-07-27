@@ -1,11 +1,11 @@
 const PopupWithForm = (props) => {
 
   const classPopupOpened = `${props.isOpen ? 'popup_opened' : ''}`;
-  console.log(classPopupOpened);
+
   return (
     <div className={`popup popup_type_${props.name} ${classPopupOpened}`}>
       <div className="popup__container">
-        <button className="popup__button-close" type="button" aria-label="Закрыть"></button>
+        <button className="popup__button-close" onClick={props.onClose} type="button" aria-label="Закрыть"></button>
         <form className="popup__form" name={`form-${props.name}`} action="form" method="post" novalidate>
           <h3 className="popup__title">{props.title}</h3>
 
