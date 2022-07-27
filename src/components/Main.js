@@ -1,37 +1,24 @@
 import avatar from '../images/avatar.jpg';
 
-const Main = () => {
-  const handleEditAvatarClick = () => {
-    const popup = document.querySelector('.popup_type_update-avatar');
-    popup.classList.add('popup_opened');
-  };
+const Main = (props) => {
 
-  const handleEditProfileClick = () => {
-    const popup = document.querySelector('.popup_type_edit-profile');
-    popup.classList.add('popup_opened');
-  };
-
-  const handleAddPlaceClick = () => {
-    const popup = document.querySelector('.popup_type_add-card');
-    popup.classList.add('popup_opened');
-  };
 
   return (
-    <main class="content">
-      <section class="profile" aria-label="Профиль пользователя">
-        <div class="profile__avatar-container"  onClick={handleEditAvatarClick}>
-          <img src={avatar} alt="Аватар пользователя" class="profile__avatar-image"/>
+    <main className="content">
+      <section className="profile" aria-label="Профиль пользователя">
+        <div className="profile__avatar-container"  onClick={props.onEditAvatar}>
+          <img src={avatar} alt="Аватар пользователя" className="profile__avatar-image"/>
         </div>
-        <div class="profile__info">
-          <div class="profile__container-name">
-            <h1 class="profile__name">User</h1>
-            <button class="profile__button-edit" type="button" onClick={handleEditProfileClick} aria-label="Редактировать"></button>
+        <div className="profile__info">
+          <div className="profile__container-name">
+            <h1 className="profile__name">User</h1>
+            <button className="profile__button-edit" type="button" onClick={props.onEditProfile} aria-label="Редактировать"></button>
           </div>
-          <p class="profile__job">About</p>
+          <p className="profile__job">About</p>
         </div>
-        <button class="profile__button-add" type="button" onClick={handleAddPlaceClick} aria-label="Добавить"></button>
+        <button className="profile__button-add" type="button" onClick={props.onAddPlace} aria-label="Добавить"></button>
       </section>
-      <section class="cards" aria-label="Фотокарточки"></section>
+      <section className="cards" aria-label="Фотокарточки"></section>
     </main>
   );
 }
