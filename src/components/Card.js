@@ -1,4 +1,7 @@
 const Card = (props) => {
+  const handleClick = () => {
+    props.onCardClick(props.card);
+  };
   return (
     <article className="card">
       <button className="card__button-remove" type="button" aria-label="Удалить"></button>

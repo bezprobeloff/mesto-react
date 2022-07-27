@@ -36,7 +36,7 @@ const Main = (props) => {
       </section>
       <section className="cards" aria-label="Фотокарточки">
         {cards.map((card, i) =>
-          <Card card={card} key={i}/>
+          <Card card={card} key={i} onCardClick={props.onCardClick}/>
         )}
       </section>
     </main>
