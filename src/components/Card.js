@@ -1,11 +1,11 @@
 const Card = (props) => {
-  const handleClick = () => {
+  const handleImageClick = () => {
     props.onCardClick(props.card);
   };
   return (
     <article className="card">
       <button className="card__button-remove" type="button" aria-label="Удалить"></button>
-      <img src={props.card.link} className="card__image" alt="Фото"/>
+      <img src={props.card.link} onClick={handleImageClick} className="card__image" alt="Фото"/>
       <div className="card__info">
         <h2 className="card__name">{props.card.name}</h2>
         <div className="card__container-like">
