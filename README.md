@@ -52,3 +52,7 @@
 ### `npm run build`
 
 Сборка приложения в папку `build` для продакшн
+
+**Где можно посмотреть и полазить по сайту сразу?**
+
+А вот здесь &rarr; [Mesto Russia (React)](https://mesto-bezprobeloff.vercel.app/).
