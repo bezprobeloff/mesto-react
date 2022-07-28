@@ -1,13 +1,13 @@
-const PopupWithForm = (props) => {
+const PopupWithForm = ({name, title, isOpen, onClose}) => {
 
-  const classPopupOpened = `${props.isOpen ? 'popup_opened' : ''}`;
+  const classPopupOpened = `${isOpen ? 'popup_opened' : ''}`;
 
   return (
-    <div className={`popup popup_type_${props.name} ${classPopupOpened}`}>
+    <div className={`popup popup_type_${name} ${classPopupOpened}`}>
       <div className="popup__container">
-        <button className="popup__button-close" onClick={props.onClose} type="button" aria-label="Закрыть"></button>
-        <form className="popup__form" name={`form-${props.name}`} action="form" noValidate>
-          <h3 className="popup__title">{props.title}</h3>
+        <button className="popup__button-close" onClick={onClose} type="button" aria-label="Закрыть"></button>
+        <form className="popup__form" name={`form-${name}`} action="form" noValidate>
+          <h3 className="popup__title">{title}</h3>
 
           <button className="popup__button popup__button_type_submit" type="submit">Сохранить</button>
         </form>
