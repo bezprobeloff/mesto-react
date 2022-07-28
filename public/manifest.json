@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Место",
+  "name": "Сервис хранения фото места путешествий",
   "icons": [
     {
       "src": "favicon.ico",
