@@ -25,6 +25,14 @@ const Main = (props) => {
       .catch(err => console.log(err));
   };
 
+  const handleCardDelete = (card) => {
+    api.removeCard(card._id)
+      .then(() => {
+        setCards(cards.filter(item => item._id !== card._id));
+      })
+      .catch(err => console.log(err));
+  };
+
   return (
     <main className="content">
       <section className="profile" aria-label="Профиль пользователя">
@@ -42,7 +50,10 @@ const Main = (props) => {
       </section>
       <section className="cards" aria-label="Фотокарточки">
         {cards.map(card =>
-          <Card card={card} key={card._id} onCardClick={props.onCardClick} onCardLike={handleCardLike}/>
+          <Card card={card} key={card._id}
+            onCardClick={props.onCardClick} onCardDelete={handleCardDelete}
+            onCardLike={handleCardLike}
+          />
         )}
       </section>
     </main>
