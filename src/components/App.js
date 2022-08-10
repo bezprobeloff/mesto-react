@@ -1,9 +1,11 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import Main from './Main';
 import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
+import { api } from '../utils/api';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 const App = () => {
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = useState(false);
@@ -11,6 +13,15 @@ const App = () => {
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = useState(false);
   const [isImagePopupOpen, setImagePopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState({});
+  const [currentUser, setCurrentUser] = useState({});
+
+  useEffect(() => {
+    api.getUser()
+      .then(res => {
+        setCurrentUser(res);
+      })
+      .catch((err) => console.log(err));
+  });
 
   const handleEditAvatarClick = () => {
     setEditAvatarPopupOpen(true);
@@ -39,12 +50,14 @@ const App = () => {
   return (
     <div className="page__content">
       <Header/>
-      <Main
-        onEditProfile={handleEditProfileClick}
-        onAddPlace={handleAddPlaceClick}
-        onEditAvatar={handleEditAvatarClick}
-        onCardClick={handleCardClick}
-      />
+      <CurrentUserContext.Provider value={currentUser}>
+        <Main
+          onEditProfile={handleEditProfileClick}
+          onAddPlace={handleAddPlaceClick}
+          onEditAvatar={handleEditAvatarClick}
+          onCardClick={handleCardClick}
+        />
+      </CurrentUserContext.Provider>
       <Footer/>
       <PopupWithForm
         title='Обновить аватар'
