@@ -6,6 +6,7 @@ import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
 import { api } from '../utils/api';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
+import EditProfilePopup from './EditProfilePopup';
 
 const App = () => {
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = useState(false);
@@ -21,7 +22,7 @@ const App = () => {
         setCurrentUser(res);
       })
       .catch((err) => console.log(err));
-  });
+  }, []);
 
   const handleEditAvatarClick = () => {
     setEditAvatarPopupOpen(true);
@@ -65,12 +66,7 @@ const App = () => {
         isOpen={isEditAvatarPopupOpen}
         onClose={closeAllPopups}
       />
-      <PopupWithForm
-        title='Редактировать профиль'
-        name='edit-profile'
-        isOpen={isEditProfilePopupOpen}
-        onClose={closeAllPopups}
-      />
+      <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}/>
       <PopupWithForm
         title='Новое место'
         name='add-card'
