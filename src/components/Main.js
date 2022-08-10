@@ -5,11 +5,6 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 const Main = (props) => {
   const currentUser = useContext(CurrentUserContext);
-  /*
-  const [userName, setUserName] = useState('');
-  const [userDescription, setDescription] = useState('');
-  const [userAvatar, setUserAvatar] = useState('');
-  */
   const [cards, setCards] = useState([]);
 
   useEffect(() => {
@@ -19,6 +14,16 @@ const Main = (props) => {
       })
       .catch(err => console.log(err));
   }, []);
+
+  const handleCardLike = (card) => {
+    const isLiked = card.likes.some(like => like._id === currentUser._id);
+
+    api.changeLikeCardStatus(card._id, !isLiked)
+      .then(newCard => {
+        setCards(cards.map(item => item._id === card._id ? newCard : item));
+      })
+      .catch(err => console.log(err));
+  };
 
   return (
     <main className="content">
@@ -37,7 +42,7 @@ const Main = (props) => {
       </section>
       <section className="cards" aria-label="Фотокарточки">
         {cards.map(card =>
-          <Card card={card} key={card._id} onCardClick={props.onCardClick}/>
+          <Card card={card} key={card._id} onCardClick={props.onCardClick} onCardLike={handleCardLike}/>
         )}
       </section>
     </main>
