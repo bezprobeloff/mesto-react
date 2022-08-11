@@ -1,11 +1,14 @@
-# Проект: Место (React)
+<h1 align="center">Mesto Russia (React)</h1>
+<p align="center">
+    <img alt="Version" src="https://img.shields.io/github/package-json/v/bezprobeloff/mesto-react" />
+    <img alt="Quality" src="https://img.shields.io/badge/status-release-orange.svg" >
+    <img alt="Made by: Bezprobeloff" src="https://img.shields.io/badge/made%20by-Bezprobeloff-blue" />
+</p>
 
-### Обзор
-* Интро
-* Технологии
-* Где посмотреть
+Ссылка на deploy проекта в vercel: **[Mesto Russia (React)](https://mesto-bezprobeloff.vercel.app/)**
 
-**Интро**
+
+**Обзор**
 
 Проект сайта о красивых местах в России, который можно посмотреть в режиме мобильного, планшета и десктопа.
 На каждом устройстве сайт адаптивно меняется для удобства и читабельности.
@@ -52,7 +55,3 @@
 ### `npm run build`
 
 Сборка приложения в папку `build` для продакшн
-
-**Где можно посмотреть и полазить по сайту сразу?**
-
-А вот здесь &rarr; [Mesto Russia (React)](https://mesto-bezprobeloff.vercel.app/).
