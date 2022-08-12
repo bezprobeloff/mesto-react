@@ -41,6 +41,15 @@ const App = () => {
     setSelectedCard(card);
   };
 
+  const handleUpdateUser = ({name, about}) => {
+    api.setUserInfo({name, about})
+      .then(() => {
+        setCurrentUser({...currentUser, name, about});
+        closeAllPopups();
+      })
+      .catch(err => console.log(err));
+  };
+
   const closeAllPopups = () => {
     setEditAvatarPopupOpen(false);
     setEditProfilePopupOpen(false);
@@ -58,7 +67,6 @@ const App = () => {
           onEditAvatar={handleEditAvatarClick}
           onCardClick={handleCardClick}
         />
-      </CurrentUserContext.Provider>
       <Footer/>
       <PopupWithForm
         title='Обновить аватар'
@@ -66,7 +74,8 @@ const App = () => {
         isOpen={isEditAvatarPopupOpen}
         onClose={closeAllPopups}
       />
-      <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}/>
+      <EditProfilePopup isOpen={isEditProfilePopupOpen} onUpdateUser={handleUpdateUser}
+        onClose={closeAllPopups}/>
       <PopupWithForm
         title='Новое место'
         name='add-card'
@@ -78,6 +87,7 @@ const App = () => {
         isOpen={isImagePopupOpen}
         onClose={closeAllPopups}
       />
+      </CurrentUserContext.Provider>
     </div>
   );
 }
