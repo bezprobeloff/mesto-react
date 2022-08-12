@@ -7,6 +7,7 @@ import ImagePopup from './ImagePopup';
 import { api } from '../utils/api';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import EditProfilePopup from './EditProfilePopup';
+import EditAvatarPopup from './EditAvatarPopup';
 
 const App = () => {
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = useState(false);
@@ -50,6 +51,15 @@ const App = () => {
       .catch(err => console.log(err));
   };
 
+  const handleUpdateAvatar = (avatar) => {
+    api.updateAvatar(avatar)
+      .then(() => {
+        setCurrentUser({...currentUser, avatar});
+        closeAllPopups();
+      })
+      .catch(err => console.log(err));
+  };
+
   const closeAllPopups = () => {
     setEditAvatarPopupOpen(false);
     setEditProfilePopupOpen(false);
@@ -68,13 +78,9 @@ const App = () => {
           onCardClick={handleCardClick}
         />
       <Footer/>
-      <PopupWithForm
-        title='Обновить аватар'
-        name='update-avatar'
-        isOpen={isEditAvatarPopupOpen}
-        onClose={closeAllPopups}
-      />
       <EditProfilePopup isOpen={isEditProfilePopupOpen} onUpdateUser={handleUpdateUser}
+        onClose={closeAllPopups}/>
+      <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onUpdateAvatar={handleUpdateAvatar}
         onClose={closeAllPopups}/>
       <PopupWithForm
         title='Новое место'
