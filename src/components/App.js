@@ -14,7 +14,7 @@ const App = () => {
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = useState(false);
   const [isImagePopupOpen, setImagePopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState({});
-  const [currentUser, setCurrentUser] = useState({});
+  const [currentUser, setCurrentUser] = useState({name: 'user', about: 'about', avatar: ''});
 
   useEffect(() => {
     api.getUser()
