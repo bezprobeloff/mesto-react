@@ -15,6 +15,7 @@ const App = () => {
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = useState(false);
   const [isImagePopupOpen, setImagePopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState({});
+  const [cards, setCards] = useState([]);
   const [currentUser, setCurrentUser] = useState({name: 'user', about: 'about', avatar: ''});
 
   useEffect(() => {
@@ -24,6 +25,15 @@ const App = () => {
       })
       .catch((err) => console.log(err));
   }, []);
+
+  useEffect(() => {
+    api.getInitialCards()
+      .then((dataCards) => {
+        setCards(dataCards);
+      })
+      .catch(err => console.log(err));
+  }, []);
+
 
   const handleEditAvatarClick = () => {
     setEditAvatarPopupOpen(true);
@@ -40,6 +50,24 @@ const App = () => {
   const handleCardClick = (card) => {
     setImagePopupOpen(true);
     setSelectedCard(card);
+  };
+
+  const handleCardLike = (card) => {
+    const isLiked = card.likes.some(like => like._id === currentUser._id);
+
+    api.changeLikeCardStatus(card._id, !isLiked)
+      .then(newCard => {
+        setCards(cards.map(item => item._id === card._id ? newCard : item));
+      })
+      .catch(err => console.log(err));
+  };
+
+  const handleCardDelete = (card) => {
+    api.removeCard(card._id)
+      .then(() => {
+        setCards(cards.filter(item => item._id !== card._id));
+      })
+      .catch(err => console.log(err));
   };
 
   const handleUpdateUser = ({name, about}) => {
@@ -72,10 +100,13 @@ const App = () => {
       <Header/>
       <CurrentUserContext.Provider value={currentUser}>
         <Main
+          cards={cards}
           onEditProfile={handleEditProfileClick}
           onAddPlace={handleAddPlaceClick}
           onEditAvatar={handleEditAvatarClick}
           onCardClick={handleCardClick}
+          onCardLike={handleCardLike}
+          onCardDelete={handleCardDelete}
         />
       <Footer/>
       <EditProfilePopup isOpen={isEditProfilePopupOpen} onUpdateUser={handleUpdateUser}
