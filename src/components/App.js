@@ -2,12 +2,12 @@ import React, {useEffect, useState} from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import Main from './Main';
-import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
 import { api } from '../utils/api';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
+import AddPlacePopup from './AddPlacePopup';
 
 const App = () => {
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = useState(false);
@@ -19,21 +19,13 @@ const App = () => {
   const [currentUser, setCurrentUser] = useState({name: 'user', about: 'about', avatar: ''});
 
   useEffect(() => {
-    api.getUser()
-      .then(res => {
-        setCurrentUser(res);
-      })
-      .catch((err) => console.log(err));
-  }, []);
-
-  useEffect(() => {
-    api.getInitialCards()
-      .then((dataCards) => {
+    Promise.all([api.getUser(), api.getInitialCards()])
+      .then(([user, dataCards]) => {
+        setCurrentUser(user);
         setCards(dataCards);
       })
       .catch(err => console.log(err));
   }, []);
-
 
   const handleEditAvatarClick = () => {
     setEditAvatarPopupOpen(true);
@@ -69,6 +61,15 @@ const App = () => {
       })
       .catch(err => console.log(err));
   };
+
+  const handleAddPlace = ({name, link}) => {
+    api.createCard({name, link})
+      .then((newCard) => {
+        setCards([newCard, ...cards]);
+        closeAllPopups();
+      })
+      .catch(err => console.log(err));
+  }
 
   const handleUpdateUser = ({name, about}) => {
     api.setUserInfo({name, about})
@@ -113,16 +114,10 @@ const App = () => {
         onClose={closeAllPopups}/>
       <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onUpdateAvatar={handleUpdateAvatar}
         onClose={closeAllPopups}/>
-      <PopupWithForm
-        title='Новое место'
-        name='add-card'
-        isOpen={isAddPlacePopupOpen}
-        onClose={closeAllPopups}
-        />
+      <AddPlacePopup isOpen={isAddPlacePopupOpen} onAddPlace={handleAddPlace}
+        onClose={closeAllPopups}/>
       <ImagePopup
-        card={selectedCard}
-        isOpen={isImagePopupOpen}
-        onClose={closeAllPopups}
+        card={selectedCard} isOpen={isImagePopupOpen} onClose={closeAllPopups}
       />
       </CurrentUserContext.Provider>
     </div>
