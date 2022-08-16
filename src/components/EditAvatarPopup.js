@@ -1,6 +1,6 @@
 import PopupWithForm from "./PopupWithForm";
 import { useRef, useState, useEffect } from 'react';
-import useInput from "../pages/hooks/useInput";
+import useInput from "../utils/hooks/useInput";
 
 const EditAvatarPopup = ({isOpen, onClose, onUpdateAvatar}) => {
   const inputAvatarRef = useRef();

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import PopupWithForm from './PopupWithForm';
-import useInput from '../pages/hooks/useInput';
+import useInput from '../utils/hooks/useInput';
 
 const AddPlacePopup = ({isOpen, onClose, onAddPlace}) => {
   const inputName = useInput({inputValue: ''});
