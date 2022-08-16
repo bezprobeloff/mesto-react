@@ -3,7 +3,10 @@ const PopupWithForm = ({name, title, isOpen, onClose, onSubmit, isFormNotValid, 
   const classPopupOpened = `${isOpen ? 'popup_opened' : ''}`;
 
   return (
-    <div className={`popup popup_type_${name} ${classPopupOpened}`}>
+    <div
+      className={`popup popup_type_${name} ${classPopupOpened}`}
+      onClick={(evt) => (evt.target === evt.currentTarget) && onClose()}
+    >
       <div className="popup__container">
         <button
           className="popup__button-close"
