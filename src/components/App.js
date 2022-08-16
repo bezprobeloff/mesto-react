@@ -29,14 +29,17 @@ const App = () => {
 
   const handleEditAvatarClick = () => {
     setEditAvatarPopupOpen(true);
+    document.addEventListener('keydown', handleEscClosePopup);
   };
 
   const handleEditProfileClick = () => {
     setEditProfilePopupOpen(true);
+    document.addEventListener('keydown', handleEscClosePopup);
   };
 
   const handleAddPlaceClick = () => {
     setAddPlacePopupOpen(true);
+    document.addEventListener('keydown', handleEscClosePopup);
   };
 
   const handleCardClick = (card) => {
@@ -89,11 +92,18 @@ const App = () => {
       .catch(err => console.log(err));
   };
 
+  const handleEscClosePopup = (evt) => {
+    if (evt.key !== 'Escape') return;
+
+    closeAllPopups();
+  }
+
   const closeAllPopups = () => {
     setEditAvatarPopupOpen(false);
     setEditProfilePopupOpen(false);
     setAddPlacePopupOpen(false);
     setImagePopupOpen(false);
+    document.removeEventListener('keydown', handleEscClosePopup);
   }
 
   return (
