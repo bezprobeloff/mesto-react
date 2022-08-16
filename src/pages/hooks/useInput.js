@@ -6,6 +6,7 @@ const useInput = ({inputValue = ''}) => {
   const [errorMessage, setErrorMessage] = useState('');
 
   const reset = () => {
+    setValue(inputValue);
     setErrorMessage('');
     setIsError(false);
   };

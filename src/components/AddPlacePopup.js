@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import PopupWithForm from './PopupWithForm';
 import useInput from '../pages/hooks/useInput';
 
@@ -9,7 +9,7 @@ const AddPlacePopup = ({isOpen, onClose, onAddPlace}) => {
     ${inputName.isError ? 'popup__input_type_error' : ''}`;
   const inputLinkClass = `popup__input popup__input_type_card-link
     ${inputLink.isError ? 'popup__input_type_error' : ''}`;
-
+  const [isFormNotValid, setIsFormNotValid] = useState(true);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -18,9 +18,16 @@ const AddPlacePopup = ({isOpen, onClose, onAddPlace}) => {
   };
 
   useEffect(() => {
+    // обнуляем инпуты и дизейблим сабмит по умолчанию
     inputName.reset();
     inputLink.reset();
+    setIsFormNotValid(true);
   }, [isOpen]);
+
+  // меняем состояние кнопки сабмит
+  useEffect(() => {
+    inputName.isError || inputLink.isError ? setIsFormNotValid(true) : setIsFormNotValid(false);
+  }, [inputName.isError, inputLink.isError]);
 
   return (
     <PopupWithForm
@@ -29,7 +36,7 @@ const AddPlacePopup = ({isOpen, onClose, onAddPlace}) => {
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
-      isNotFormValid={inputName.isError || inputLink.isError}
+      isFormNotValid={ isFormNotValid }
     >
       <>
       <input className={inputNameClass}
