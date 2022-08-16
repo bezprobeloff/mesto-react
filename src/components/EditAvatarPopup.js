@@ -1,31 +1,56 @@
 import PopupWithForm from "./PopupWithForm";
-import { useRef, useEffect } from 'react';
+import { useRef, useState, useEffect } from 'react';
+import useInput from "../pages/hooks/useInput";
 
 const EditAvatarPopup = ({isOpen, onClose, onUpdateAvatar}) => {
   const inputAvatarRef = useRef();
+  const inputAvatar = useInput({inputValue: ''});
+  const [isFormNotValid, setIsFormNotValid] = useState(true);
+
+  const inputAvatarClass = `popup__input popup__input_type_avatar
+    ${inputAvatar.isError ? 'popup__input_type_error' : ''}`;
 
   useEffect(() => {
-    inputAvatarRef.value = '';
+    inputAvatar.reset();
+    setIsFormNotValid(true);
   }, [isOpen]);
 
-  const handleChangeAvatar = (evt) => {
-    inputAvatarRef.value = evt.target.value;
-  };
+  useEffect(() => {
+    inputAvatar.isError ? setIsFormNotValid(true) : setIsFormNotValid(false);
+  }, [inputAvatar.isError]);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
 
-    onUpdateAvatar(inputAvatarRef.value);
+    onUpdateAvatar(inputAvatarRef.current?.value);
   };
 
   return (
-    <PopupWithForm title='Обновить аватар' name='update-avatar'
-    isOpen={isOpen} onClose={onClose} onSubmit={handleSubmit}>
+    <PopupWithForm
+      title='Обновить аватар'
+      name='update-avatar'
+      isOpen={isOpen}
+      onClose={onClose}
+      onSubmit={handleSubmit}
+      isFormNotValid={isFormNotValid}
+    >
       <>
-      <input className='popup__input popup__input_type_avatar'
-        type='url' name='avatar' ref={inputAvatarRef} onChange={handleChangeAvatar}
-        id='avatar' placeholder='Ссылка на аватарку' minLength='2' required/>
-      <span className='popup__input-error popup__input-error_type_avatar'></span>
+      <input
+        className={inputAvatarClass}
+        type='url'
+        name='avatar'
+        value={inputAvatar.value}
+        ref={inputAvatarRef}
+        onChange={inputAvatar.onChange}
+        id='avatar'
+        placeholder='Ссылка на аватарку'
+        minLength='2'
+        required
+      />
+      <span
+        className='popup__input-error popup__input-error_type_avatar'>
+        {inputAvatar.errorMessage}
+      </span>
       </>
     </PopupWithForm>
   );
