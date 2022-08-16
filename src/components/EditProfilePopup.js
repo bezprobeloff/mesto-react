@@ -5,8 +5,13 @@ import useInput from '../pages/hooks/useInput';
 
 const EditProfilePopup = ({isOpen, onClose, onUpdateUser}) => {
   const currentUser = useContext(CurrentUserContext);
-  const inputName = useInput(currentUser.name);
-  const inputAbout = useInput(currentUser.about);
+  const inputName = useInput({inputValue: currentUser.name});
+  const inputAbout = useInput({inputValue: currentUser.about});
+
+  const inputNameClass = `popup__input popup__input_type_user-name
+    ${inputName.isError ? 'popup__input_type_error' : ''}`;
+  const inputAboutClass = `popup__input popup__input_type_user-job
+    ${inputAbout.isError ? 'popup__input_type_error' : ''}`;
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -35,7 +40,7 @@ const EditProfilePopup = ({isOpen, onClose, onUpdateUser}) => {
     >
       <>
       <input
-        className='popup__input popup__input_type_user-name'
+        className={inputNameClass}
         value={inputName.value}
         onChange={inputName.onChange}
         type='text'
@@ -51,7 +56,7 @@ const EditProfilePopup = ({isOpen, onClose, onUpdateUser}) => {
         {inputName.errorMessage}
       </span>
       <input
-        className='popup__input popup__input_type_user-job'
+        className={inputAboutClass}
         value={inputAbout.value}
         onChange={inputAbout.onChange}
         type='text'
