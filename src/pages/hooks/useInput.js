@@ -17,7 +17,7 @@ const useInput = ({inputValue = ''}) => {
     setErrorMessage(evt.target.validationMessage);
   };
 
-  return {value, isError, errorMessage, reset, onChange};
+  return {value, setValue, isError, errorMessage, reset, onChange};
 };
 
 export default useInput;
