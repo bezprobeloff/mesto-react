@@ -78,27 +78,27 @@ const App = () => {
     api.createCard({name, link})
       .then((newCard) => {
         setCards([newCard, ...cards]);
-        closeAllPopups();
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err))
+      .finally(() => closeAllPopups());
   }
 
   const handleUpdateUser = ({name, about}) => {
     api.setUserInfo({name, about})
       .then(() => {
         setCurrentUser({...currentUser, name, about});
-        closeAllPopups();
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err))
+      .finally(() => closeAllPopups());
   };
 
   const handleUpdateAvatar = (avatar) => {
     api.updateAvatar(avatar)
       .then(() => {
         setCurrentUser({...currentUser, avatar});
-        closeAllPopups();
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err))
+      .finally(() => closeAllPopups());
   };
 
   const handleEscClosePopup = (evt) => {
