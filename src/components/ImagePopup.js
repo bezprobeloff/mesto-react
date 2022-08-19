@@ -2,7 +2,10 @@ const ImagePopup = ({card, isOpen, onClose}) => {
   const classPopupOpened = `${isOpen ? 'popup_opened' : ''}`;
 
   return (
-    <div className={`popup popup_type_view-image ${classPopupOpened}`}>
+    <div
+      className={`popup popup_type_view-image ${classPopupOpened}`}
+      onClick={(evt) => (evt.target === evt.currentTarget) && onClose()}
+    >
       <div className="popup__container">
         <button className="popup__button-close" onClick={onClose} type="button" aria-label="Закрыть"></button>
         <img src={card.link} alt={card.name} className="popup__view-image"/>
