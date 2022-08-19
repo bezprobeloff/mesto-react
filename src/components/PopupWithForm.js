@@ -1,4 +1,5 @@
-const PopupWithForm = ({name, title, isOpen, onClose, onSubmit, isFormNotValid, children}) => {
+const PopupWithForm = (props) => {
+  const {name, title, buttonText, isOpen, onClose, onSubmit, isFormNotValid, children} = props;
 
   const classPopupOpened = `${isOpen ? 'popup_opened' : ''}`;
 
@@ -27,7 +28,7 @@ const PopupWithForm = ({name, title, isOpen, onClose, onSubmit, isFormNotValid, 
               ${isFormNotValid ?'popup__button_disabled' : ''}`}
             type="submit"
             disabled={isFormNotValid}>
-              Сохранить
+              {buttonText}
           </button>
         </form>
       </div>

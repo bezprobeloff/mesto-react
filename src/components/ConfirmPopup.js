@@ -10,6 +10,7 @@ const ConfirmPopup = ({isOpen, onClose, onDeleteCard}) => {
   return (
     <PopupWithForm
     title='Вы уверены?'
+    buttonText='Да'
     name='confirm'
     isOpen={isOpen}
     onClose={onClose}
