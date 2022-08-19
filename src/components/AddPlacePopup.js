@@ -26,8 +26,14 @@ const AddPlacePopup = ({isOpen, onClose, onAddPlace}) => {
 
   // меняем состояние кнопки сабмит
   useEffect(() => {
-    inputName.isError || inputLink.isError ? setIsFormNotValid(true) : setIsFormNotValid(false);
-  }, [inputName.isError, inputLink.isError]);
+    if (inputName.isError || inputName.value === ''
+        || inputLink.isError || inputLink.value === '') {
+      setIsFormNotValid(true);
+    } else {
+      setIsFormNotValid(false);
+    }
+
+  }, [inputName.value, inputLink.value]);
 
   return (
     <PopupWithForm

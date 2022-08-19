@@ -15,9 +15,16 @@ const EditAvatarPopup = ({isOpen, onClose, onUpdateAvatar}) => {
     setIsFormNotValid(true);
   }, [isOpen]);
 
+
+  // меняем состояние кнопки сабмит
   useEffect(() => {
-    inputAvatar.isError ? setIsFormNotValid(true) : setIsFormNotValid(false);
-  }, [inputAvatar.isError]);
+    if (inputAvatar.isError || inputAvatar.value === '') {
+      setIsFormNotValid(true);
+    } else {
+      setIsFormNotValid(false);
+    }
+
+  }, [inputAvatar.value]);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
