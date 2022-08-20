@@ -1,10 +1,10 @@
-import PopupWithForm from "./PopupWithForm";
-import { useRef, useState, useEffect } from 'react';
-import useInput from "../utils/hooks/useInput";
+import PopupWithForm from './PopupWithForm';
+import React, { useRef, useState, useEffect } from 'react';
+import useInput from '../utils/hooks/useInput';
 
-const EditAvatarPopup = ({isOpen, onClose, onUpdateAvatar}) => {
+const EditAvatarPopup = ({ isOpen, onClose, onUpdateAvatar }) => {
   const inputAvatarRef = useRef();
-  const inputAvatar = useInput({inputValue: ''});
+  const inputAvatar = useInput({ inputValue: '' });
   const [isFormNotValid, setIsFormNotValid] = useState(true);
 
   const inputAvatarClass = `popup__input popup__input_type_avatar
@@ -15,7 +15,6 @@ const EditAvatarPopup = ({isOpen, onClose, onUpdateAvatar}) => {
     setIsFormNotValid(true);
   }, [isOpen]);
 
-
   // меняем состояние кнопки сабмит
   useEffect(() => {
     if (inputAvatar.isError || inputAvatar.value === '') {
@@ -23,7 +22,6 @@ const EditAvatarPopup = ({isOpen, onClose, onUpdateAvatar}) => {
     } else {
       setIsFormNotValid(false);
     }
-
   }, [inputAvatar.value]);
 
   const handleSubmit = (evt) => {
@@ -43,22 +41,21 @@ const EditAvatarPopup = ({isOpen, onClose, onUpdateAvatar}) => {
       isFormNotValid={isFormNotValid}
     >
       <>
-      <input
-        className={inputAvatarClass}
-        type='url'
-        name='avatar'
-        value={inputAvatar.value}
-        ref={inputAvatarRef}
-        onChange={inputAvatar.onChange}
-        id='avatar'
-        placeholder='Ссылка на аватарку'
-        minLength='2'
-        required
-      />
-      <span
-        className='popup__input-error popup__input-error_type_avatar'>
-        {inputAvatar.errorMessage}
-      </span>
+        <input
+          className={inputAvatarClass}
+          type='url'
+          name='avatar'
+          value={inputAvatar.value}
+          ref={inputAvatarRef}
+          onChange={inputAvatar.onChange}
+          id='avatar'
+          placeholder='Ссылка на аватарку'
+          minLength='2'
+          required
+        />
+        <span className='popup__input-error popup__input-error_type_avatar'>
+          {inputAvatar.errorMessage}
+        </span>
       </>
     </PopupWithForm>
   );

@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState } from 'react';
 
-const useInput = ({inputValue = ''}) => {
+const useInput = ({ inputValue = '' }) => {
   const [value, setValue] = useState(inputValue);
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -17,7 +17,7 @@ const useInput = ({inputValue = ''}) => {
     setErrorMessage(evt.target.validationMessage);
   };
 
-  return {value, setValue, isError, errorMessage, reset, onChange};
+  return { value, setValue, isError, errorMessage, reset, onChange };
 };
 
 export default useInput;
