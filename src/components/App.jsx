@@ -11,11 +11,11 @@ import AddPlacePopup from './AddPlacePopup';
 import ConfirmPopup from './ConfirmPopup';
 
 const App = () => {
-  const [isEditProfilePopupOpen, setEditProfilePopupOpen] = useState(false);
-  const [isAddPlacePopupOpen, setAddPlacePopupOpen] = useState(false);
-  const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = useState(false);
-  const [isConfirmPopupOpen, setConfirmPopupOpen] = useState(false);
-  const [isImagePopupOpen, setImagePopupOpen] = useState(false);
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
+  const [isConfirmPopupOpen, setIsConfirmPopupOpen] = useState(false);
+  const [isImagePopupOpen, setIsImagePopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState({});
   const [cards, setCards] = useState([]);
   const [currentUser, setCurrentUser] = useState({
@@ -33,30 +33,39 @@ const App = () => {
       .catch((err) => console.log(err));
   }, []);
 
-  const handleEditAvatarClick = () => {
-    setEditAvatarPopupOpen(true);
+  const setHandleEscClosePopup = () => {
     document.addEventListener('keydown', handleEscClosePopup);
+  };
+
+  const removeHandleEscClosePopup = () => {
+    document.addEventListener('keydown', handleEscClosePopup);
+  };
+
+  const handleEditAvatarClick = () => {
+    setIsEditAvatarPopupOpen(true);
+    setHandleEscClosePopup();
   };
 
   const handleEditProfileClick = () => {
-    setEditProfilePopupOpen(true);
-    document.addEventListener('keydown', handleEscClosePopup);
+    setIsEditProfilePopupOpen(true);
+    setHandleEscClosePopup();
   };
 
   const handleAddPlaceClick = () => {
-    setAddPlacePopupOpen(true);
-    document.addEventListener('keydown', handleEscClosePopup);
+    setIsAddPlacePopupOpen(true);
+    setHandleEscClosePopup();
   };
 
   const handleDeleteCardClick = (card) => {
-    setConfirmPopupOpen(true);
+    setIsConfirmPopupOpen(true);
     setSelectedCard(card);
-    document.addEventListener('keydown', handleEscClosePopup);
+    setHandleEscClosePopup();
   };
 
   const handleCardClick = (card) => {
-    setImagePopupOpen(true);
+    setIsImagePopupOpen(true);
     setSelectedCard(card);
+    setHandleEscClosePopup();
   };
 
   const handleCardLike = (card) => {
@@ -117,12 +126,12 @@ const App = () => {
   };
 
   const closeAllPopups = () => {
-    setEditAvatarPopupOpen(false);
-    setEditProfilePopupOpen(false);
-    setAddPlacePopupOpen(false);
-    setConfirmPopupOpen(false);
-    setImagePopupOpen(false);
-    document.removeEventListener('keydown', handleEscClosePopup);
+    setIsEditAvatarPopupOpen(false);
+    setIsEditProfilePopupOpen(false);
+    setIsAddPlacePopupOpen(false);
+    setIsConfirmPopupOpen(false);
+    setIsImagePopupOpen(false);
+    removeHandleEscClosePopup();
   };
 
   return (

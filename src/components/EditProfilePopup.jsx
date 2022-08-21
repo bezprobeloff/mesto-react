@@ -39,38 +39,36 @@ const EditProfilePopup = ({ isOpen, onClose, onUpdateUser }) => {
       onSubmit={handleSubmit}
       isFormNotValid={inputName.isError || inputAbout.isError}
     >
-      <>
-        <input
-          className={inputNameClass}
-          value={inputName.value}
-          onChange={inputName.onChange}
-          type='text'
-          name='name'
-          id='user-name'
-          placeholder='Имя'
-          minLength='2'
-          maxLength='40'
-          required
-        />
-        <span className='popup__input-error popup__input-error_type_user-name'>
-          {inputName.errorMessage}
-        </span>
-        <input
-          className={inputAboutClass}
-          value={inputAbout.value}
-          onChange={inputAbout.onChange}
-          type='text'
-          name='about'
-          id='user-about'
-          placeholder='О себе'
-          minLength='2'
-          maxLength='200'
-          required
-        />
-        <span className='popup__input-error popup__input-error_type_user-job'>
-          {inputAbout.errorMessage}
-        </span>
-      </>
+      <input
+        className={inputNameClass}
+        value={inputName.value}
+        onChange={inputName.onChange}
+        type='text'
+        name='name'
+        id='user-name'
+        placeholder='Имя'
+        minLength='2'
+        maxLength='40'
+        required
+      />
+      <span className='popup__input-error popup__input-error_type_user-name'>
+        {inputName.errorMessage}
+      </span>
+      <input
+        className={inputAboutClass}
+        value={inputAbout.value}
+        onChange={inputAbout.onChange}
+        type='text'
+        name='about'
+        id='user-about'
+        placeholder='О себе'
+        minLength='2'
+        maxLength='200'
+        required
+      />
+      <span className='popup__input-error popup__input-error_type_user-job'>
+        {inputAbout.errorMessage}
+      </span>
     </PopupWithForm>
   );
 };

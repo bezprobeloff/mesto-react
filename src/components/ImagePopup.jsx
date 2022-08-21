@@ -2,11 +2,13 @@ import React from 'react';
 
 const ImagePopup = ({ card, isOpen, onClose }) => {
   const classPopupOpened = `${isOpen ? 'popup_opened' : ''}`;
+  const handleOverlayClose = (evt) =>
+    evt.target === evt.currentTarget && onClose();
 
   return (
     <div
       className={`popup popup_type_view-image ${classPopupOpened}`}
-      onClick={(evt) => evt.target === evt.currentTarget && onClose()}
+      onClick={handleOverlayClose}
     >
       <div className='popup__container'>
         <button

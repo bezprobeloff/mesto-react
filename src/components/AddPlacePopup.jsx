@@ -48,36 +48,34 @@ const AddPlacePopup = ({ isOpen, onClose, onAddPlace }) => {
       onSubmit={handleSubmit}
       isFormNotValid={isFormNotValid}
     >
-      <>
-        <input
-          className={inputNameClass}
-          value={inputName.value ?? ''}
-          onChange={inputName.onChange}
-          type='text'
-          name='card-name'
-          id='card-name'
-          placeholder='Название'
-          minLength='2'
-          maxLength='30'
-          required
-        />
-        <span className='popup__input-error popup__input-error_type_card-name'>
-          {inputName.errorMessage}
-        </span>
-        <input
-          className={inputLinkClass}
-          value={inputLink.value ?? ''}
-          onChange={inputLink.onChange}
-          type='url'
-          name='card-link'
-          id='card-link'
-          placeholder='Ссылка на картинку'
-          required
-        />
-        <span className='popup__input-error popup__input-error_type_card-link'>
-          {inputLink.errorMessage}
-        </span>
-      </>
+      <input
+        className={inputNameClass}
+        value={inputName.value ?? ''}
+        onChange={inputName.onChange}
+        type='text'
+        name='card-name'
+        id='card-name'
+        placeholder='Название'
+        minLength='2'
+        maxLength='30'
+        required
+      />
+      <span className='popup__input-error popup__input-error_type_card-name'>
+        {inputName.errorMessage}
+      </span>
+      <input
+        className={inputLinkClass}
+        value={inputLink.value ?? ''}
+        onChange={inputLink.onChange}
+        type='url'
+        name='card-link'
+        id='card-link'
+        placeholder='Ссылка на картинку'
+        required
+      />
+      <span className='popup__input-error popup__input-error_type_card-link'>
+        {inputLink.errorMessage}
+      </span>
     </PopupWithForm>
   );
 };

@@ -40,23 +40,21 @@ const EditAvatarPopup = ({ isOpen, onClose, onUpdateAvatar }) => {
       onSubmit={handleSubmit}
       isFormNotValid={isFormNotValid}
     >
-      <>
-        <input
-          className={inputAvatarClass}
-          type='url'
-          name='avatar'
-          value={inputAvatar.value}
-          ref={inputAvatarRef}
-          onChange={inputAvatar.onChange}
-          id='avatar'
-          placeholder='Ссылка на аватарку'
-          minLength='2'
-          required
-        />
-        <span className='popup__input-error popup__input-error_type_avatar'>
-          {inputAvatar.errorMessage}
-        </span>
-      </>
+      <input
+        className={inputAvatarClass}
+        type='url'
+        name='avatar'
+        value={inputAvatar.value}
+        ref={inputAvatarRef}
+        onChange={inputAvatar.onChange}
+        id='avatar'
+        placeholder='Ссылка на аватарку'
+        minLength='2'
+        required
+      />
+      <span className='popup__input-error popup__input-error_type_avatar'>
+        {inputAvatar.errorMessage}
+      </span>
     </PopupWithForm>
   );
 };
