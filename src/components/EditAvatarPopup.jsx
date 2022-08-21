@@ -1,9 +1,8 @@
 import PopupWithForm from './PopupWithForm';
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import useInput from '../utils/hooks/useInput';
 
 const EditAvatarPopup = ({ isOpen, onClose, onUpdateAvatar }) => {
-  const inputAvatarRef = useRef();
   const inputAvatar = useInput({ inputValue: '' });
   const [isFormNotValid, setIsFormNotValid] = useState(true);
 
@@ -27,7 +26,7 @@ const EditAvatarPopup = ({ isOpen, onClose, onUpdateAvatar }) => {
   const handleSubmit = (evt) => {
     evt.preventDefault();
 
-    onUpdateAvatar(inputAvatarRef.current?.value);
+    onUpdateAvatar(inputAvatar.value);
   };
 
   return (
@@ -45,7 +44,6 @@ const EditAvatarPopup = ({ isOpen, onClose, onUpdateAvatar }) => {
         type='url'
         name='avatar'
         value={inputAvatar.value}
-        ref={inputAvatarRef}
         onChange={inputAvatar.onChange}
         id='avatar'
         placeholder='Ссылка на аватарку'
