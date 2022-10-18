@@ -7,7 +7,7 @@
 
 Ссылка на deploy проекта в vercel: **[Mesto Russia (React)](https://mesto-bezprobeloff.vercel.app/)**
 
-![Watch the video](./readme/preview.gif)
+https://user-images.githubusercontent.com/44836223/196440316-6860ee67-26f6-4d03-845a-30fd256388cd.mp4
 
 **Обзор**
 
